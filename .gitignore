@@ -1,0 +1,28 @@
+# Dependencies
+/node_modules
+
+# Build output
+/dist/
+/.next/
+/.vinext/
+/out/
+
+# Local Cloudflare, Wrangler and Sites state
+/.wrangler/
+/.sites-runtime/
+
+# Environment files (SITE_URL and any secrets) stay out of git
+.env*
+
+# Original photographs for `npm run media`; only the encoded output in
+# public/media/ is committed
+/media-src/
+
+# TypeScript incremental build cache, rewritten on every typecheck
+*.tsbuildinfo
+
+# OS and tooling noise
+.DS_Store
+Thumbs.db
+npm-debug.log*
+*.pem
