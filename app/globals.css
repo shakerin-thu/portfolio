@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Entry stylesheet.
+
+   Everything is split by concern under `app/styles/` and bundled from here:
+
+     tokens      colour, type scale, rhythm and motion variables
+     base        reset, typography defaults, focus, shared primitives
+     nav         header and menu overlay
+     home        the scrolling home narrative
+     pages       index lists, detail pages, essays, status pages
+     responsive  every breakpoint, in one place
+
+   Import order is load-bearing: later files depend on the tokens, and the
+   responsive overrides must come last.
+   ========================================================================== */
+
+@import 'tailwindcss';
+
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/nav.css';
+@import './styles/home.css';
+@import './styles/pages.css';
+@import './styles/responsive.css';

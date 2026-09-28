@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Responsive overrides
+
+   Every breakpoint lives here, once. The previous stylesheet declared the same
+   `max-width: 760px` block twice with conflicting rules; keeping the small-screen
+   design in a single place makes that class of bug impossible to reintroduce.
+   ========================================================================== */
+
+/* --- Tablet / narrow desktop ------------------------------------------------ */
+@media (max-width: 1080px) {
+  .code-chapter,
+  .markets-section {
+    grid-template-columns: 1fr;
+  }
+
+  .markets-copy {
+    padding-top: 0;
+  }
+
+  .detail-section {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .thinking-list a {
+    grid-template-columns: 120px minmax(0, 1fr) auto;
+  }
+
+  .thinking-excerpt {
+    display: none;
+  }
+
+  .index-list a {
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+  }
+
+  .index-list .index-meta {
+    display: none;
+  }
+}
+
+/* --- Phone -------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  :root {
+    /* `Mohammad` is the widest unbreakable string on the page and the hero
+       lines are `width: max-content`, so display-1 is sized to keep that word
+       inside the gutters down to a 280px viewport rather than let it clip. */
+    --display-1: clamp(2.3rem, 13.6vw, 5rem);
+    --display-2: clamp(2.4rem, 12vw, 4.4rem);
+    --display-3: clamp(1.9rem, 9.4vw, 3.2rem);
+  }
+
+  /* Hero ------------------------------------------------------------------- */
+  .hero {
+    padding-bottom: clamp(24px, 5vh, 40px);
+  }
+
+  .hero-media {
+    height: 46vh;
+  }
+
+  .hero-eyebrow {
+    top: clamp(70px, 10vh, 96px);
+    letter-spacing: 0.16em;
+  }
+
+  .hero-line:nth-child(2),
+  .hero-line:nth-child(3) {
+    margin-left: 0;
+  }
+
+  .hero-foot {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .hero-index {
+    display: none;
+  }
+
+  .hero-thesis {
+    justify-self: start;
+    max-width: none;
+    font-size: 0.95rem;
+  }
+
+  .hero-enter {
+    width: 100%;
+  }
+
+  /* Narrative -------------------------------------------------------------- */
+  .manifesto {
+    min-height: auto;
+  }
+
+  .manifesto-copy {
+    margin-left: 0;
+  }
+
+  .code-chapter {
+    min-height: auto;
+  }
+
+  .code-image {
+    height: 46vh;
+  }
+
+  .transition-quote {
+    padding-inline: var(--gutter);
+  }
+
+  .portrait-still {
+    width: 76vw;
+  }
+
+  .project-panel {
+    flex-basis: 86vw;
+  }
+
+  .project-art {
+    height: 44vh;
+  }
+
+  .project-info {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .project-arrow {
+    align-self: flex-end;
+  }
+
+  .markets-section,
+  .lead-section,
+  .closing,
+  .contact-panel {
+    min-height: auto;
+  }
+
+  .lead-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-grid li,
+  .lead-grid li + li {
+    padding: 28px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .thinking-list a {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .closing-line:nth-of-type(2) {
+    margin-left: 0;
+  }
+
+  .site-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer div:last-child {
+    text-align: left;
+  }
+
+  /* Inner pages ------------------------------------------------------------- */
+  .inner {
+    padding-top: clamp(112px, 16vh, 150px);
+  }
+
+  .inner-intro,
+  .contact-page .contact-copy {
+    max-width: none;
+    margin-left: 0;
+    font-size: 1.4rem;
+  }
+
+  .index-list a {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .index-list .index-year {
+    display: none;
+  }
+
+  .index-summary {
+    display: none;
+  }
+
+  .detail-blocks {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline li,
+  .contact-list li,
+  .award-list li {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .award-figure {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .venture-body {
+    grid-template-columns: 1fr;
+  }
+
+  .venture-summary {
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .article-sign {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

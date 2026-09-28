@@ -1,0 +1,182 @@
+/* ==========================================================================
+   Site header and full-screen menu overlay
+   ========================================================================== */
+
+.site-head {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(18px, 2.6vh, 28px) var(--gutter);
+  border-bottom: 1px solid transparent;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-caps);
+  transition:
+    transform 0.45s var(--ease-cinematic),
+    padding 0.3s var(--ease-soft),
+    background-color 0.3s var(--ease-soft),
+    border-color 0.3s var(--ease-soft);
+}
+
+/* Once off the hero the bar needs its own ground: the page runs through two
+   light sections where paper-white text would otherwise vanish. */
+.site-head.is-pinned {
+  padding-block: clamp(13px, 1.9vh, 20px);
+  background: rgba(5, 5, 5, 0.72);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  color: var(--paper);
+}
+
+.site-head.is-hidden {
+  transform: translateY(-100%);
+}
+
+.signature {
+  font-size: 0.95rem;
+  font-weight: 650;
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+
+.signature:hover {
+  color: var(--amber);
+}
+
+.menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border: 0;
+  background: none;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.menu-trigger i {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--dur-fast) var(--ease-soft);
+}
+
+.menu-trigger i::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--dur-fast) var(--ease-soft);
+}
+
+.menu-trigger:hover i,
+.menu-trigger:hover i::after {
+  width: 28px;
+}
+
+/* --- Overlay -------------------------------------------------------------- */
+.menu-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12vh var(--gutter);
+  background: #030303;
+  transform: translateY(-102%);
+  transition: transform 0.75s var(--ease-cinematic);
+}
+
+.menu-panel.is-open {
+  transform: none;
+}
+
+.menu-close {
+  position: absolute;
+  top: clamp(18px, 3.5vh, 34px);
+  right: var(--gutter);
+  border: 0;
+  background: none;
+  color: var(--paper);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.menu-panel nav ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-panel nav a {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 2vw, 34px);
+  font-size: clamp(2.6rem, 7.4vw, 7rem);
+  font-weight: 650;
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  transition:
+    color var(--dur-fast) var(--ease-soft),
+    transform var(--dur-fast) var(--ease-soft);
+}
+
+.menu-panel nav a:hover,
+.menu-panel nav a.is-current {
+  color: var(--amber);
+}
+
+.menu-panel nav a:hover {
+  transform: translateX(15px);
+}
+
+.menu-panel nav small {
+  font-family: var(--font-mono);
+  font-size: var(--caption);
+  letter-spacing: 0.15em;
+  color: var(--muted-dim);
+}
+
+.menu-meta {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(24px, 5vh, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  text-transform: uppercase;
+  font-size: var(--caption);
+  letter-spacing: 0.14em;
+}
+
+.menu-meta a:hover {
+  color: var(--amber);
+}
+
+.menu-meta span {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .menu-meta span {
+    width: 100%;
+    margin-left: 0;
+  }
+}
