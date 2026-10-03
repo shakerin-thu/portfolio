@@ -10,10 +10,11 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
-    "start": "vinext start",
+    "start": "vite preview",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "typecheck": "tsc --noEmit",
     "media": "node scripts/encode-media.mjs",
+    "favicon": "node scripts/make-favicon.mjs",
     "check": "npm run lint && npm run typecheck && npm run build",
     "db:generate": "drizzle-kit generate"
   },
@@ -33,7 +34,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
-    "@vitejs/plugin-rsc": "0.5.26",
+    "@vitejs/plugin-rsc": "0.5.35",
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
@@ -41,7 +42,7 @@
     "sharp": "^0.35.4",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
-    "vinext": "1.0.0-beta.3",
+    "vinext": "1.0.1",
     "vite": "8.0.13",
     "wrangler": "4.92.0"
   }

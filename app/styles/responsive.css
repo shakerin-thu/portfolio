@@ -210,9 +210,14 @@
     grid-template-columns: 1fr;
   }
 
-  .venture-summary {
+  .venture-summary,
+  .appearance-summary {
     max-width: none;
     margin-left: 0;
+  }
+
+  .appearance-gallery {
+    grid-template-columns: 1fr;
   }
 
   .article-sign {

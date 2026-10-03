@@ -440,6 +440,110 @@
   color: var(--muted-dim);
 }
 
+/* --- Speaking ----------------------------------------------------------------
+   An exhibition rather than a list: each appearance leads with its photograph
+   at full measure, then the account, then the supporting stills. */
+.appearance {
+  padding: clamp(56px, 11vh, 140px) 0;
+  border-top: 1px solid var(--line-strong);
+  /* The anchor from an award's "On stage" link must clear the fixed header. */
+  scroll-margin-top: 110px;
+}
+
+.appearance-when {
+  font-family: var(--font-mono);
+  font-size: var(--caption);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+}
+
+.appearance-head h2 {
+  margin-top: 14px;
+  font-size: var(--display-3);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.appearance-event {
+  margin-top: 14px;
+  max-width: 48ch;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: #cac8c2;
+}
+
+.appearance-where {
+  margin-top: 6px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.appearance-lead {
+  margin: clamp(36px, 7vh, 80px) 0 0;
+}
+
+.appearance-lead img {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.appearance-lead figcaption,
+.appearance-gallery figcaption {
+  margin-top: 10px;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--muted-dim);
+}
+
+.appearance-summary {
+  max-width: 26ch;
+  margin: clamp(32px, 6vh, 64px) 0 0 auto;
+  font-size: var(--body-lg);
+  line-height: 1.32;
+}
+
+.appearance-prose {
+  max-width: 62ch;
+  margin-top: clamp(32px, 6vh, 64px);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.7;
+  color: #cac8c2;
+}
+
+.appearance-prose p + p {
+  margin-top: 1.4em;
+}
+
+.appearance-facts {
+  margin-top: clamp(28px, 5vh, 48px);
+}
+
+/* Stills beyond the lead, sized so two sit side by side on a wide screen and
+   a tall portrait shot never dominates the column. */
+.appearance-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(32px, 6vh, 64px);
+}
+
+.appearance-gallery figure {
+  margin: 0;
+}
+
+.appearance-gallery img {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.appearance .award-proof {
+  margin-top: clamp(28px, 5vh, 48px);
+}
+
 /* --- Ventures --------------------------------------------------------------- */
 .venture {
   padding: clamp(56px, 11vh, 140px) 0;

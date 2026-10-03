@@ -15,6 +15,12 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
 const localBindingConfig = {
   main: 'vinext/server/app-router-entry',
   compatibility_flags: ['nodejs_compat'],
+  // In production the host supplies SITE_URL as a Worker variable, which
+  // `nodejs_compat` surfaces on `process.env`. Locally the worker does not
+  // inherit the shell, so `SITE_URL=… npm run dev` would silently fall back to
+  // localhost and local pages would not match what deploys. Forwarding it here
+  // makes the local runtime behave like the deployed one.
+  ...(process.env.SITE_URL ? { vars: { SITE_URL: process.env.SITE_URL } } : {}),
   d1_databases: d1
     ? [
         {

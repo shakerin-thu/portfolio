@@ -13,13 +13,19 @@ html {
   background: var(--black);
   /* Anchor targets clear the fixed header when jumped to directly. */
   scroll-padding-top: 96px;
+  /* The viewport takes its overflow from the root element. Declaring this on
+     body alone is not enough — Chrome does not propagate `clip` up from body,
+     so the marquee dragged the whole page 2466px sideways on a 1440px screen.
+     `clip` rather than `hidden` because it does not make this a scroll
+     container, so sticky positioning inside still works and the vertical axis
+     keeps scrolling normally. */
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
-  /* `clip` keeps the marquee and project track from creating a horizontal
-     scrollbar without turning body into a scroll container, which would
-     break position: sticky. */
+  /* Kept alongside the root rule above so the marquee and the project track
+     are clipped by their own containing block as well as by the viewport. */
   overflow-x: clip;
   background: var(--black);
   color: var(--paper);

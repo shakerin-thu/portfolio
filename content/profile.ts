@@ -69,8 +69,11 @@ export const roles: Role[] = [
     period: '2022—25',
     organisation: 'Rabbani IT Solution',
     title: 'Creative Head',
+    // The home page states these as two separate figures — a team of 7–10 led
+    // day to day, inside a company of roughly sixty. This read "a team of
+    // roughly sixty", which contradicted it. Confirm which is right.
     detail:
-      'Led creative and operational work for a team of roughly sixty people.',
+      'Led day-to-day creative and operational work within a company of roughly sixty people.',
   },
 ];
 
