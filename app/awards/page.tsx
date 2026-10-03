@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Arrow } from '@/components/Arrow';
+import { Still } from '@/components/Still';
 import { awards } from '@/content/profile';
+import { appearances } from '@/content/speaking';
 
 export const metadata: Metadata = {
   title: 'Awards',
@@ -30,6 +32,10 @@ export default function AwardsPage() {
         <ol className="award-list">
           {awards.map((award) => {
             const meta = [award.organiser, award.location, award.entrant].filter(Boolean);
+            // Only link to the stage photographs once that entry actually exists.
+            const stage = award.appearance
+              ? appearances.find((entry) => entry.slug === award.appearance)
+              : undefined;
             return (
               <li key={`${award.year}-${award.title}`} data-reveal>
                 <span className="award-year">{award.year}</span>
@@ -40,12 +46,19 @@ export default function AwardsPage() {
 
                   {meta.length > 0 ? <p className="award-meta">{meta.join(' · ')}</p> : null}
 
-                  {award.proof?.length || award.project ? (
+                  {award.proof?.length || award.project || stage ? (
                     <ul className="award-proof">
                       {award.project ? (
                         <li>
                           <Link href={`/work/${award.project}`}>
                             The project <Arrow />
+                          </Link>
+                        </li>
+                      ) : null}
+                      {stage ? (
+                        <li>
+                          <Link href={`/speaking#${stage.slug}`}>
+                            On stage <Arrow />
                           </Link>
                         </li>
                       ) : null}
@@ -60,23 +73,7 @@ export default function AwardsPage() {
                   ) : null}
                 </div>
 
-                {award.image ? (
-                  <figure className="award-figure">
-                    <picture>
-                      <source srcSet={`/media/${award.image.src}.avif`} type="image/avif" />
-                      <source srcSet={`/media/${award.image.src}.webp`} type="image/webp" />
-                      <img
-                        src={`/media/${award.image.src}.jpg`}
-                        alt={award.image.alt}
-                        width={award.image.width}
-                        height={award.image.height}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </picture>
-                    {award.image.caption ? <figcaption>{award.image.caption}</figcaption> : null}
-                  </figure>
-                ) : null}
+                {award.image ? <Still image={award.image} className="award-figure" /> : null}
               </li>
             );
           })}

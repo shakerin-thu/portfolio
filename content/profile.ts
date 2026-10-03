@@ -5,6 +5,8 @@
  * job title happens once rather than in five separate JSX literals.
  */
 
+import type { Proof, SiteImage } from './media';
+
 export const profile = {
   name: 'Mohammad Sajidus Shakerin',
   chineseName: '孔献恩',
@@ -108,25 +110,19 @@ export type Award = {
   entrant?: 'Individual' | 'Team';
   /** Slug of a related entry in `projects.ts`, if the award was for one. */
   project?: string;
+  /** Slug of a related entry in `speaking.ts`, if there are stage photographs. */
+  appearance?: string;
   /**
    * Public evidence. Prefer an official results or announcement page over a
    * scanned certificate: it is verifiable, it does not age, and it carries no
    * personal identifiers.
    */
-  proof?: { label: string; url: string }[];
+  proof?: Proof[];
   /**
    * A photograph from the event — receiving the award, presenting, the team on
    * stage. Encode it with `npm run media` first, then reference the basename.
    */
-  image?: {
-    /** Basename under /media, without extension, e.g. 'award-isces-2023'. */
-    src: string;
-    /** Describe what is happening, not just 'award photo'. */
-    alt: string;
-    width: number;
-    height: number;
-    caption?: string;
-  };
+  image?: SiteImage;
 };
 
 export const awards: Award[] = [

@@ -6,6 +6,7 @@ import { Arrow } from '@/components/Arrow';
 import { articles, findArticle } from '@/content/articles';
 import { profile } from '@/content/profile';
 import { ogImage } from '@/lib/site';
+import { breadcrumbGraph, jsonLd } from '@/lib/structured-data';
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -49,6 +50,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       authors: [profile.name],
       images: [ogImage],
     },
+    // As with `openGraph`, declaring this replaces the parent object rather
+    // than merging into it; without it every essay shares the site-wide card.
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt,
+      images: [ogImage.url],
+    },
   };
 }
 
@@ -62,6 +71,17 @@ export default async function ArticlePage({ params }: PageProps) {
 
   return (
     <main id="main" className="inner article">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbGraph([
+              { name: 'Thinking', path: '/thinking' },
+              { name: article.title, path: `/thinking/${article.slug}` },
+            ]),
+          ),
+        }}
+      />
       <article>
         <header>
           <p className="inner-kicker">

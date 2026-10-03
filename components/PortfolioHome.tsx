@@ -7,6 +7,7 @@ import { projects } from '@/content/projects';
 import { Arrow } from './Arrow';
 import { ConsoleSignature } from './ConsoleSignature';
 import { HeroPortrait } from './HeroPortrait';
+import { Still } from './Still';
 
 const DISCIPLINE_MARQUEE = 'Code · Business · Design · People · Markets · Ideas · ';
 
@@ -103,19 +104,15 @@ export function PortfolioHome() {
           <br />
           careers.
         </h2>
-        <figure className="portrait-still" data-reveal>
-          {/* Deliberately a plain <img>: this asset is pre-encoded at build
-              time and needs no runtime optimiser. See HeroPortrait. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/media/portrait-face.jpg"
-            alt=""
-            width={400}
-            height={368}
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
+        {/* Dimensions are the encoded file's real 340×338, so the browser
+            reserves the right box and the section does not jump as it loads.
+            `alt` is empty on purpose: the hero already names the subject, and
+            repeating it here would make a screen reader say it twice. */}
+        <Still
+          image={{ src: 'portrait-face', alt: '', width: 340, height: 338 }}
+          className="portrait-still"
+          reveal
+        />
         <p className="transition-answer">So I built across them.</p>
       </section>
 
@@ -137,7 +134,10 @@ export function PortfolioHome() {
                 <span className="project-num" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className={`project-art art-${index + 1}`} aria-hidden="true">
+                {/* The palette comes from :nth-child in home.css, so the card
+                    needs no index-derived class and a sixth project styles
+                    itself. */}
+                <span className="project-art" aria-hidden="true">
                   {project.metric ?? project.year}
                 </span>
                 <span className="project-info">

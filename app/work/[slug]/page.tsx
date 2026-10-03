@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { Arrow } from '@/components/Arrow';
 import { findProject, projects } from '@/content/projects';
 import { ogImage } from '@/lib/site';
+import { breadcrumbGraph, jsonLd } from '@/lib/structured-data';
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -31,6 +32,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `/work/${project.slug}`,
       images: [ogImage],
     },
+    // Declaring `twitter` on a page replaces the parent's object outright, the
+    // same way `openGraph` does. Without this the card falls back to the
+    // site-wide title and every project shares one preview.
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} — ${project.category}`,
+      description: project.summary,
+      images: [ogImage.url],
+    },
   };
 }
 
@@ -44,6 +54,17 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <main id="main" className="inner">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            breadcrumbGraph([
+              { name: 'Work', path: '/work' },
+              { name: project.title, path: `/work/${project.slug}` },
+            ]),
+          ),
+        }}
+      />
       <article>
         <header className="detail-hero">
           <p className="inner-kicker">{project.category}</p>

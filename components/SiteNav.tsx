@@ -5,17 +5,19 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import { profile } from '@/content/profile';
+import { appearances } from '@/content/speaking';
 import { ventures } from '@/content/ventures';
 import { getLenisInstance } from '@/lib/lenis-instance';
 
-// Ventures only appears once there is a company to show, so the menu never
-// links to an empty section.
+// Ventures and Speaking each appear only once they have something to show, so
+// the menu never links to an empty section.
 const NAV_ITEMS: { label: string; href: string }[] = [
   { label: 'Index', href: '/' },
   { label: 'Work', href: '/work' },
   ...(ventures.length > 0 ? [{ label: 'Ventures', href: '/ventures' }] : []),
   { label: 'Thinking', href: '/thinking' },
   { label: 'Awards', href: '/awards' },
+  ...(appearances.length > 0 ? [{ label: 'Speaking', href: '/speaking' }] : []),
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];

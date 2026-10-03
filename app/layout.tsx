@@ -6,7 +6,8 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { SiteNav } from '@/components/SiteNav';
 import { SmoothScroll } from '@/components/SmoothScroll';
 import { profile } from '@/content/profile';
-import { absoluteUrl, ogImage, siteUrl } from '@/lib/site';
+import { ogImage, siteUrl } from '@/lib/site';
+import { jsonLd, siteGraph } from '@/lib/structured-data';
 
 import './globals.css';
 
@@ -46,7 +47,13 @@ export const metadata: Metadata = {
     'entrepreneurship',
     'Beijing',
   ],
-  alternates: { canonical: '/' },
+  alternates: {
+    canonical: '/',
+    // A bare string, not Next's `[{ url, title }]` descriptor form: vinext's
+    // metadata shim passes this value straight to a string helper, so the
+    // descriptor typechecks against Next's types and then throws at render.
+    types: { 'application/rss+xml': '/feed.xml' },
+  },
   openGraph: {
     type: 'website',
     siteName: profile.name,
@@ -72,45 +79,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: '#050505',
   colorScheme: 'dark',
-};
-
-/** Person and WebSite graph, so search engines can attribute the work. */
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Person',
-      '@id': absoluteUrl('/#person'),
-      name: profile.name,
-      alternateName: profile.chineseName,
-      url: siteUrl,
-      email: `mailto:${profile.email}`,
-      image: absoluteUrl('/og.jpg'),
-      jobTitle: 'Technology & Product',
-      description: profile.description,
-      knowsLanguage: [...profile.languages],
-      homeLocation: {
-        '@type': 'Place',
-        name: profile.location.label,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: profile.location.city,
-          addressCountry: profile.location.country,
-        },
-      },
-      alumniOf: { '@type': 'CollegeOrUniversity', name: 'Tsinghua University' },
-      sameAs: [profile.links.github],
-    },
-    {
-      '@type': 'WebSite',
-      '@id': absoluteUrl('/#website'),
-      url: siteUrl,
-      name: profile.name,
-      description: profile.description,
-      inLanguage: 'en',
-      publisher: { '@id': absoluteUrl('/#person') },
-    },
-  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -149,8 +117,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
         <script
           type="application/ld+json"
-          // Serialised from a literal above; there is no user input in this string.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          // Serialised from content/ in this repository; `<` is escaped by
+          // jsonLd so the block cannot be closed early.
+          dangerouslySetInnerHTML={{ __html: jsonLd(siteGraph()) }}
         />
       </body>
     </html>

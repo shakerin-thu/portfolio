@@ -6,6 +6,8 @@
  * menu item and the sitemap all pick it up.
  */
 
+import type { SiteImage } from './media';
+
 export type Venture = {
   /** URL-safe id, used as the anchor on the ventures page. */
   slug: string;
@@ -29,13 +31,7 @@ export type Venture = {
   /** Public site, if there is one. Omit rather than linking a placeholder. */
   website?: string;
   /** Optional still. Encode with `npm run media` before referencing it. */
-  image?: {
-    /** Basename under /media, without extension, e.g. 'venture-one'. */
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-  };
+  image?: SiteImage;
 };
 
 export const ventures: Venture[] = [

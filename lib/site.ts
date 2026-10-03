@@ -12,6 +12,19 @@ export const siteUrl = (process.env.SITE_URL ?? FALLBACK_ORIGIN).replace(/\/+$/,
 
 export const isPlaceholderOrigin = siteUrl === FALLBACK_ORIGIN;
 
+// Shipping the localhost fallback is the failure this module exists to prevent,
+// and it is invisible in the rendered page: every canonical, social card and
+// sitemap entry simply points at a machine nobody else can reach. Warn loudly
+// at build and boot time, which is the last moment it can still be fixed.
+if (isPlaceholderOrigin && process.env.NODE_ENV === 'production') {
+  console.warn(
+    '[site] SITE_URL is not set, so every absolute URL — canonical links, Open ' +
+      `Graph and Twitter images, sitemap.xml, robots.txt and the JSON-LD graph — ` +
+      `will point at ${FALLBACK_ORIGIN} and social previews will fail silently. ` +
+      'Set SITE_URL to the public origin, with no trailing slash, before deploying.',
+  );
+}
+
 /** Absolute URL for a site-relative path. */
 export function absoluteUrl(path = '/'): string {
   return new URL(path, `${siteUrl}/`).toString();

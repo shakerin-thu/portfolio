@@ -392,23 +392,26 @@
   transform: scale(0.99);
 }
 
-.art-1 {
+/* Five card palettes, cycled with :nth-child so the sixth project picks up the
+   first palette again instead of rendering unstyled. Adding work to
+   content/projects.ts never needs a matching CSS rule. */
+.project-panel:nth-child(5n + 1) .project-art {
   background: #baa170;
   color: #0b0b0b;
 }
-.art-2 {
+.project-panel:nth-child(5n + 2) .project-art {
   background: #1d2b28;
   color: #91d1b6;
 }
-.art-3 {
+.project-panel:nth-child(5n + 3) .project-art {
   background: #172238;
   color: #82aef8;
 }
-.art-4 {
+.project-panel:nth-child(5n + 4) .project-art {
   background: #ddd7ca;
   color: #111;
 }
-.art-5 {
+.project-panel:nth-child(5n + 5) .project-art {
   background: #241b17;
   color: var(--amber);
 }

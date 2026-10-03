@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 
 import { articles } from '@/content/articles';
 import { projects } from '@/content/projects';
+import { appearances } from '@/content/speaking';
 import { ventures } from '@/content/ventures';
 import { absoluteUrl } from '@/lib/site';
 
@@ -32,6 +33,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
           {
             url: absoluteUrl('/ventures'),
             lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+          },
+        ]
+      : []),
+    ...(appearances.length > 0
+      ? [
+          {
+            url: absoluteUrl('/speaking'),
+            // The newest appearance is what changed; claiming "now" on every
+            // crawl teaches search engines to distrust the whole file.
+            lastModified: new Date(appearances[0].published),
             changeFrequency: 'monthly' as const,
             priority: 0.8,
           },

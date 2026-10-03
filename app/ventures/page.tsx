@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { Arrow } from '@/components/Arrow';
+import { Still } from '@/components/Still';
 import { profile } from '@/content/profile';
 import { ventures } from '@/content/ventures';
 
@@ -54,22 +55,7 @@ export default function VenturesPage() {
 
           <p className="venture-summary">{venture.summary}</p>
 
-          {venture.image ? (
-            <figure className="venture-figure">
-              <picture>
-                <source srcSet={`/media/${venture.image.src}.avif`} type="image/avif" />
-                <source srcSet={`/media/${venture.image.src}.webp`} type="image/webp" />
-                <img
-                  src={`/media/${venture.image.src}.jpg`}
-                  alt={venture.image.alt}
-                  width={venture.image.width}
-                  height={venture.image.height}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-            </figure>
-          ) : null}
+          {venture.image ? <Still image={venture.image} className="venture-figure" /> : null}
 
           <div className="venture-body">
             <section aria-label={`About ${venture.name}`}>
