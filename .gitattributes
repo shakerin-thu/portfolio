@@ -1,0 +1,20 @@
+# Normalise line endings.
+#
+# The repository arrived with a mix of CRLF and LF — files uploaded through a
+# browser on Windows kept CRLF while the rest stayed LF. Mixed endings make git
+# report whole files as changed when only one line moved, and make exact-match
+# tooling fail unpredictably.
+#
+# Text files are stored in the repository with LF. Git still checks them out
+# with the local convention, so editing on Windows stays normal.
+* text=auto eol=lf
+
+# Binary assets are never converted.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico  binary
+*.woff  binary
+*.woff2 binary
